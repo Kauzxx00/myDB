@@ -1,11 +1,19 @@
 const fs = require("fs-extra");
 const path = require("path");
 
-const dbPath = path.join(__dirname, "../db.json");
+const loadData = (fileName) => {
+  const folderPath = path.join(__dirname, "../myDB");
+  const filePath = path.join(folderPath, fileName);
 
-const loadData = () => {
-  if (!fs.existsSync(dbPath)) fs.writeFileSync(dbPath, JSON.stringify({}));
-  return JSON.parse(fs.readFileSync(dbPath, "utf8"));
+  if (!fs.existsSync(folderPath)) {
+    fs.mkdirSync(folderPath, { recursive: true });
+  }
+
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, JSON.stringify({}));
+  }
+  
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
 };
 
 module.exports = loadData;

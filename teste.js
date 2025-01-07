@@ -1,6 +1,4 @@
-const db = require("./index.js")
+const { MyDB } = require("./index.js");
+const db = new MyDB();
 
-db.create("12345")
-
-db.update("12345", { "valores=>valor1": "valor1"})
-db.push("12345", { "arrays=>array1": "valor1" })
+db.create("12345");

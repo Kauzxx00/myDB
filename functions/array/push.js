@@ -26,12 +26,12 @@ function getNestedArray(obj, path) {
 }
 
 // Função principal para adicionar valores a arrays
-function push(id, values) {
+function push(fileName, id, values) {
 	if (!id || typeof values !== "object" || Array.isArray(values)) {
 		throw new Error("ID e objeto de atualização são obrigatórios.");
 	}
 
-	const database = loadData();
+	const database = loadData(fileName);
 	if (!database[id]) {
 		throw new Error(`Nenhum item encontrado com o ID "${id}".`);
 	}
@@ -41,7 +41,7 @@ function push(id, values) {
 		array.push(values[path]);
 	}
 
-	saveData(database);
+	saveData(fileName, database);
 }
 
 module.exports = push;
