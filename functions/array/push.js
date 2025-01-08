@@ -3,7 +3,7 @@ const saveData = require("../saveData.js");
 
 // Função para acessar ou criar arrays em objetos aninhados
 function getNestedArray(obj, path) {
-	const keys = path.split("=>");
+	const keys = path.split(".");
 	let current = obj;
 
 	for (let i = 0; i < keys.length; i++) {

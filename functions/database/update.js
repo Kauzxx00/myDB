@@ -3,7 +3,7 @@ const saveData = require("../saveData.js");
 
 // Função para adicionar valores em objetos aninhados
 const setNestedValue = (obj, path, value) => {
-  const keys = path.split("=>");
+  const keys = path.split(".");
   let current = obj;
 
   for (let i = 0; i < keys.length; i++) {
