@@ -2,7 +2,7 @@ const fs = require("fs-extra");
 const path = require("path");
 
 const saveData = (fileName, data) => {
-  const folderPath = path.join(__dirname, "../myDB");
+  const folderPath = path.resolve(process.cwd(), "myDB");
   const filePath = path.join(folderPath, fileName);
 
   if (!fs.existsSync(folderPath)) {
