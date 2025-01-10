@@ -1,5 +1,5 @@
 {
-  "name": "my-db",
+  "name": "@kauzx00/my-db",
   "version": "1.0.0",
   "description": "Uma simples database local",
   "main": "index.js",
