@@ -2,7 +2,9 @@ const create = require('./functions/database/create');
 const update = require('./functions/database/update');
 const get = require('./functions/database/get');
 const del = require('./functions/database/delete');
+
 const push = require('./functions/array/push');
+const pull = require('./functions/array/pull');
 
 class MyDB {
   constructor(fileName = "myDatabase.json") {
@@ -13,7 +15,9 @@ class MyDB {
     this.update = (id, updates) => update(this.fileName, id, updates);
     this.get = (id, keys) => get(this.fileName, id, keys);
     this.delete = (id) => del(this.fileName, id);
+    
     this.push = (id, value) => push(this.fileName, id, value);
+    this.pull = (id, value) => pull(this.fileName, id, value);
   }
 }
 
