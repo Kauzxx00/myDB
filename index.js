@@ -1,5 +1,5 @@
 const create = require('./functions/database/create');
-const update = require('./functions/database/update');
+const updateMany = require('./functions/database/updateMany');
 const get = require('./functions/database/get');
 const del = require('./functions/database/delete');
 
@@ -12,7 +12,7 @@ class MyDB {
     this.fileName = fileName.endsWith(".json") ? fileName : `${fileName}.json`;
 
     this.create = (id, data) => create(this.fileName, id, data);
-    this.update = (id, updates) => update(this.fileName, id, updates);
+    this.updateMany = (query, updates) => updateMany(this.fileName, query, updates);
     this.get = (id, keys) => get(this.fileName, id, keys);
     this.delete = (id) => del(this.fileName, id);
     
