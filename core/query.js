@@ -29,6 +29,9 @@ function Query(data, query) {
             case "equal":
               if (current[key] !== value) return false;
               break;
+            case "notequal":
+              if (current[key] !== value) return false;
+              break;
             case "less":
               if (current[key] >= value) return false;
               break;

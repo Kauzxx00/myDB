@@ -1,5 +1,5 @@
-const loadData = require("../loadData.js");
-const saveData = require("../saveData.js");
+const loadData = require("../util/loadData.js");
+const saveData = require("../util/saveData.js");
 
 const Query = require("../../core/query.js");
 const Operators = require("../../core/operators.js");

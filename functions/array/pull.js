@@ -1,5 +1,5 @@
-const loadData = require("../loadData.js");
-const saveData = require("../saveData.js");
+const loadData = require("../util/loadData.js");
+const saveData = require("../util/saveData.js");
 
 function getNestedArray(obj, path) {
   const keys = path.split(".");

@@ -1,5 +1,5 @@
-const loadData = require("../loadData.js");
-const saveData = require("../saveData.js");
+const loadData = require("../util/loadData.js");
+const saveData = require("../util/saveData.js");
 
 // Função para adicionar valores em objetos aninhados
 const setNestedValue = (obj, path, value) => {

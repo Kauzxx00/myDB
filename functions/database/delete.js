@@ -1,5 +1,5 @@
-const loadData = require("../loadData.js");
-const saveData = require("../saveData.js");
+const loadData = require("../util/loadData.js");
+const saveData = require("../util/saveData.js");
 
 const del = (fileName, id) => {
   if (!id) throw new Error('O identificador é obrigatório para a função "delete".');

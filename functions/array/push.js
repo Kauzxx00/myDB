@@ -1,5 +1,5 @@
-const loadData = require("../loadData.js");
-const saveData = require("../saveData.js");
+const loadData = require("../util/loadData.js");
+const saveData = require("../util/saveData.js");
 
 // Função para acessar ou criar arrays em objetos aninhados
 function getNestedArray(obj, path) {

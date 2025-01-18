@@ -1,4 +1,4 @@
-const loadData = require("../loadData.js");
+const loadData = require("../util/loadData.js");
 
 const get = (fileName, id, keys) => {
   if (!id) {
