@@ -7,16 +7,28 @@ const Operators = require("../../core/operators.js");
 function updateMany(fileName, { query }, updates) {
   const database = loadData(fileName);
 
-  const id = Object.keys(database).find((key) => Query(database[key], query));
+  const matchingIds = Object.keys(database).filter((key) => Query(database[key], query));
 
-  if (!id) {
+  if (matchingIds.length === 0) {
     throw new Error("Nenhum item encontrado que corresponda à consulta.");
   }
 
-  for (const operation in updates) {
-    const changes = updates[operation];
-    for (const path in changes) {
-      Operators(database[id], path, changes[path], operation);
+  const formattedUpdates = {};
+  for (const key in updates) {
+    if (typeof updates[key] === "object" && !Array.isArray(updates[key])) {
+      formattedUpdates[key] = updates[key];
+    } else {
+      formattedUpdates.set = { ...updates };
+      break;
+    }
+  }
+
+  for (const id of matchingIds) {
+    for (const operation in formattedUpdates) {
+      const changes = formattedUpdates[operation];
+      for (const path in changes) {
+        Operators(database[id], path, changes[path], operation);
+      }
     }
   }
 

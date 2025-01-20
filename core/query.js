@@ -12,7 +12,13 @@ function Query(data, query) {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
 
-        // Tentado vetificar se é um array ( nao sei se ta bom kkk.. )
+        // Caso não tenha operador, fazer a comparação direta
+        if (!operators.includes(operator)) {
+          if (current[key] !== value) return false;
+          break;
+        }
+
+        // Tentativa de verificar se é um array
         if (Array.isArray(current)) {
           if (
             !current.some((item) =>
