@@ -1,55 +1,51 @@
 function Query(data, query) {
-  const operators = Object.keys(query);
+  for (const key in query) {
+    const value = query[key];
 
-  for (const operator of operators) {
-    const conditions = query[operator];
+    if (typeof value === "object" && !Array.isArray(value)) {
+      for (const operator in value) {
+        const operatorValue = value[operator];
+        const keys = key.split(".");
+        let current = data;
 
-    for (const path in conditions) {
-      const value = conditions[path];
-      const keys = path.split(".");
+        for (let i = 0; i < keys.length; i++) {
+          const k = keys[i];
+
+          if (i === keys.length - 1) {
+            switch (operator) {
+              case "equal":
+                if (current[k] !== operatorValue) return false;
+                break;
+              case "notequal":
+                if (current[k] === operatorValue) return false;
+                break;
+              case "less":
+                if (current[k] >= operatorValue) return false;
+                break;
+              case "greater":
+                if (current[k] <= operatorValue) return false;
+                break;
+              default:
+                throw new Error(`Operador inválido ou não encontrado: ${operator}`);
+            }
+          } else {
+            if (!current[k]) return false;
+            current = current[k];
+          }
+        }
+      }
+    } else {
+      const keys = key.split(".");
       let current = data;
 
       for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-
-        // Caso não tenha operador, fazer a comparação direta
-        if (!operators.includes(operator)) {
-          if (current[key] !== value) return false;
-          break;
-        }
-
-        // Tentativa de verificar se é um array
-        if (Array.isArray(current)) {
-          if (
-            !current.some((item) =>
-              Query(item, { [operator]: { [keys.slice(i).join(".")]: value } })
-            )
-          ) {
-            return false;
-          }
-          break;
-        }
+        const k = keys[i];
 
         if (i === keys.length - 1) {
-          switch (operator) {
-            case "equal":
-              if (current[key] !== value) return false;
-              break;
-            case "notequal":
-              if (current[key] !== value) return false;
-              break;
-            case "less":
-              if (current[key] >= value) return false;
-              break;
-            case "greater":
-              if (current[key] <= value) return false;
-              break;
-            default:
-              throw new Error(`Operador inválido ou não encontrado: ${operator}`);
-          }
+          if (current[k] !== value) return false;
         } else {
-          if (!current[key]) return false;
-          current = current[key];
+          if (!current[k]) return false;
+          current = current[k];
         }
       }
     }
